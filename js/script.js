@@ -53,4 +53,4 @@ console.log( step );
 // 4) Вывести на экран первые 2 цифры полученного числa
 
 // вывели первые 2 цифры переменной step через команду alert 
-// alert( String(step).slice(0,2) );
+alert( String(step).slice(0,2) );
