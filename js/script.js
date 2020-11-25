@@ -15,5 +15,5 @@ let oneArgument = function( example, callback ){
 };
 
 oneArgument( example, function( example ){
-	console.log( example.trim().substr(0, 30) + '...' );
+	console.log( example.trim().substring(0, 30 ) + '...' );
 });
