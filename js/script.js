@@ -8,10 +8,10 @@ arr.forEach(( item ) => {
 	}
 });
 
-firstFof: for (let i = 2; i < 100; i++) {
+firstFor: for (let i = 2; i < 103; i++) {
 	for (let b = 2; b < i; b++){
 		if (i % b === 0) {
-			continue firstFof;
+			continue firstFor;
 		}
 	}
 	console.log( i, 'Делители этого числа: 1 и', i  );
