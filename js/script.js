@@ -1,18 +1,28 @@
 "use strict";
 
-let arr = ['3242342', '4223423', '23423', '8678453', '295486', '743534', '234234', '786745'];
+let week = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+let mainElem = document.querySelector('.main');
+let date = new Date();
 
-arr.forEach(( item ) => {
-	if (item.startsWith('2') || item.startsWith('74')) {
-		console.log( item );
-	}
-});
-
-firstFor: for (let i = 2; i < 103; i++) {
-	for (let b = 2; b < i; b++){
-		if (i % b === 0) {
-			continue firstFor;
+let bringOut = function () {
+	mainElem.style.width = '1000px';
+	mainElem.style.height = '1000px';
+	mainElem.style.fontSize = '50px';
+	let weekMap = week.map(function( item, i ) {
+		if (i === date.getDay()) {
+			return `<div><b>${item}</b></div>`;
+		} else {
+			return `<div>${item}</div>`;
 		}
-	}
-	console.log( i, 'Делители этого числа: 1 и', i  );
-}
+	});
+	weekMap.forEach(function( item ) {
+		mainElem.insertAdjacentHTML('beforeend', item);
+	});
+	let mainElemAllCss = document.querySelectorAll('div');
+	mainElemAllCss.forEach(function( item, i ) {
+		if (i === 5 || i === 6) {
+			item.classList.add('italic');
+		}
+	});
+};
+bringOut();
