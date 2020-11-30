@@ -1,9 +1,8 @@
 "use strict";
 
-let week = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+let week = ['Воскресение', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота' ];
 let mainElem = document.querySelector('.main');
 let date = new Date();
-
 let bringOut = function () {
 	mainElem.style.width = '1000px';
 	mainElem.style.height = '1000px';
@@ -15,6 +14,8 @@ let bringOut = function () {
 			return `<div>${item}</div>`;
 		}
 	});
+	let weekMap1 = weekMap.shift();
+	weekMap.push(weekMap1);
 	weekMap.forEach(function( item ) {
 		mainElem.insertAdjacentHTML('beforeend', item);
 	});
