@@ -1,11 +1,10 @@
 "use strict";
 
-// Кнопку "Рассчитать" через id
 let start = document.getElementById('start'); // кнопка расчитать 
 let incomePlusElem = document.getElementsByTagName('button')[0], // кнопка плюсь для Дополнительный доход
 	expensesPlusElem = document.getElementsByTagName('button')[1];	// кнопка плюсь для Обязательные расходы
-// Чекбокс по id через querySelector
-let checkboxElem = document.querySelector('#deposit-check');
+
+let checkboxElem = document.querySelector('#deposit-check');	// Чекбокс по id через querySelector
 
 
 let budgetMonthElem = document.getElementsByClassName('result-total')[0],	// доход за месяц 
