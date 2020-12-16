@@ -58,23 +58,23 @@ window.addEventListener('DOMContentLoaded', ()  => {
 	//======================================================toggleMenu===========================================================
 	// menu
 	const toggleMenu = () => {
-		const menuElem = document.querySelector('menu');		// элементы со тсраницы див с меню
+		const btnMenuElem = document.querySelector('.menu'),		// элементы со тсраницы кнопка header
+			menuElem = document.querySelector('menu');				// элементы со тсраницы див с меню
 		//======================================================handlerMenu===========================================================
 		const handlerMenu = () => {
 			menuElem.classList.toggle('active-menu');	 		// навешивание стилей на див
 		};
 		//==============================================\\\\\\\handlerMenu===========================================================
 		//===================================================слушатели==============================================================
-		document.addEventListener('click', event => {
+		btnMenuElem.addEventListener('click', handlerMenu);			// слушатель на закрытие меню
+		menuElem.addEventListener('click', event => {
 			const target = event.target;
-			if (target.closest('.menu')) {							// клик по бргеру меню
-				handlerMenu();										// запуск функции	handlerMenu
-			} else if (target.classList.contains('close-btn')) {	// клик по крестику меню // проверки на вложенность получение close-btn
-				handlerMenu();										// запуск функции	handlerMenu
-			} else  if (target.closest('ul>li>a')) {				// клик по элементам меню // получаем ближайший родительский элемент ul>li>a
-				handlerMenu();										// запуск функции	handlerMenu
-			} else if (target !== menuElem) {						// клик мимо меню
-				menuElem.classList.remove('active-menu');
+			if (target.classList.contains('close-btn')) {		// проверки на вложенность получение close-btn
+				handlerMenu();									// запуск функции handlerMenu
+			} else {
+				if (target.closest('ul>li>a')) { 				// получаем ближайший родительский элемент ul>li>a
+					handlerMenu();								// запуск функции handlerMenu
+				}
 			}
 		});
 		//==============================================\\\\\\\слушатели===========================================================
@@ -127,6 +127,7 @@ window.addEventListener('DOMContentLoaded', ()  => {
 	};
 	//==============================================\\\\\\\togglePopup======================================================
 	togglePopup();
+
 
 
 	//======================================================tabs===========================================================
