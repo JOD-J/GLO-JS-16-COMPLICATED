@@ -73,7 +73,7 @@ window.addEventListener('DOMContentLoaded', ()  => {
 				handlerMenu();										// запуск функции	handlerMenu
 			} else  if (target.closest('ul>li>a')) {				// клик по элементам меню // получаем ближайший родительский элемент ul>li>a
 				handlerMenu();										// запуск функции	handlerMenu
-			} else if (target !== menuElem) {						// клик мимо меню
+			} else if (target !== menuElem && !target.closest('ul>li')) {						// клик мимо меню
 				menuElem.classList.remove('active-menu');
 			}
 		});
