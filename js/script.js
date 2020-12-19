@@ -127,39 +127,61 @@ class Todo {
 
 	//==================================================deleteItem===================================================
 	deleteItem(element) {
-		this.todoData.delete(element.parentElement.key);
-		this.render();
+		element.parentElement.style.transform = `translate(-100%)`;
+		let count  = 0;
+		const go = () => {
+			count += 2;
+			element.parentElement.style.left = `${count}%`;
+			const animate = requestAnimationFrame(go);
+			if (count  === 220) {
+				cancelAnimationFrame(animate);
+				this.todoData.delete(element.parentElement.key);
+				this.render();
+			}
+		};
+		requestAnimationFrame(go);
 	}
 	//==========================================\\\\\\deleteItem====================================================
 
 
 	//==================================================completedItem===================================================
 	completedItem(element) {
-		console.log('element: ', element);
-		console.log('element.children: ', element.children);
-		console.log('element.children[0]: ', element.children[0]);
-		console.log('element.children[1]: ', element.children[1]);
-		console.log('element.children[2]: ', element.children[2]);
-		console.log('element.children[3]: ', element.children[3]);
-		console.log('element.firstElementChild: ', element.firstElementChild);
-		console.log('element.lastElementChild: ', element.lastElementChild);
-		console.log('element.previousElementSibling: ', element.previousElementSibling);
-		console.log('element.nextElementSibling : ', element.nextElementSibling);
-		console.log('element.parentElement: ', element.parentElement);
-		console.log('element.parentElement.children: ', 	element.parentElement.children);
-		console.log('element.parentElement.children[0]: ', 	element.parentElement.children[0]);
-		console.log('element.parentElement.children[1]: ', 	element.parentElement.children[1]);
-		console.log('element.parentElement.children[2]: ', 	element.parentElement.children[2]);
-		console.log('element.parentElement.firstElementChild: ', element.parentElement.firstElementChild);
-		console.log('element.parentElement.lastElementChild: ', element.parentElement.lastElementChild);
-		console.log('element.parentElement.previousElementSibling: ', element.parentElement.previousElementSibling);
-		console.log('element.parentElement.nextElementSibling: ', element.parentElement.nextElementSibling);
-		this.todoData.forEach(item => {
-			if (item.key === element.parentElement.key) {
-				item.completed = !item.completed;
+		// console.log('element: ', element);
+		// console.log('element.children: ', element.children);
+		// console.log('element.children[0]: ', element.children[0]);
+		// console.log('element.children[1]: ', element.children[1]);
+		// console.log('element.children[2]: ', element.children[2]);
+		// console.log('element.children[3]: ', element.children[3]);
+		// console.log('element.firstElementChild: ', element.firstElementChild);
+		// console.log('element.lastElementChild: ', element.lastElementChild);
+		// console.log('element.previousElementSibling: ', element.previousElementSibling);
+		// console.log('element.nextElementSibling : ', element.nextElementSibling);
+		// console.log('element.parentElement: ', element.parentElement);
+		// console.log('element.parentElement.children: ', 	element.parentElement.children);
+		// console.log('element.parentElement.children[0]: ', 	element.parentElement.children[0]);
+		// console.log('element.parentElement.children[1]: ', 	element.parentElement.children[1]);
+		// console.log('element.parentElement.children[2]: ', 	element.parentElement.children[2]);
+		// console.log('element.parentElement.firstElementChild: ', element.parentElement.firstElementChild);
+		// console.log('element.parentElement.lastElementChild: ', element.parentElement.lastElementChild);
+		// console.log('element.parentElement.previousElementSibling: ', element.parentElement.previousElementSibling);
+		// console.log('element.parentElement.nextElementSibling: ', element.parentElement.nextElementSibling);
+		element.parentElement.style.transform  = `translate(-100%)`;
+		let count  = 0;
+		const go = () => {
+			count += 2;
+			element.parentElement.style.left = `${count}%`;
+			const animate = requestAnimationFrame(go);
+			if (count  === 220) {
+				cancelAnimationFrame(animate);
+				this.todoData.forEach(item => {
+					if (item.key === element.parentElement.key) {
+						item.completed = !item.completed;
+					}
+				});
+				this.render();
 			}
-		});
-		this.render();
+		};
+		requestAnimationFrame(go);
 	}
 	//==========================================\\\\\\completedItem====================================================
 
