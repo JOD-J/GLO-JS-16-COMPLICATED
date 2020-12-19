@@ -83,6 +83,32 @@ window.addEventListener('DOMContentLoaded', ()  => {
 	toggleMenu();
 
 
+	//==============================================\\\\\\\animationBtn===========================================================
+	const animationBtn = () => {
+		const animationBtn = document.querySelectorAll('a[href*="#"]'),
+			animationTime = 500,
+			framesCount = 100;
+		animationBtn.forEach(item => {
+			item.addEventListener('click', event => {
+				event.preventDefault();
+				const coordY = document.querySelector(item.getAttribute('href')).getBoundingClientRect().top + window.pageYOffset;
+				const scroller = setInterval(() => {
+					const scrollBy = coordY / framesCount;
+					if (scrollBy > window.pageYOffset - coordY && window.innerHeight + window.pageYOffset < document.body.offsetHeight) {
+						window.scrollBy(0, scrollBy);
+					} else {
+						window.scrollTo(0, coordY);
+						clearInterval(scroller);
+					}
+				}, animationTime / framesCount);
+			});
+		});
+
+	};
+	//==============================================\\\\\\\animationBtn===========================================================
+	animationBtn();
+
+
 	//======================================================togglePopup===========================================================
 	// popup
 	const togglePopup = () => {
