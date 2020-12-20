@@ -127,13 +127,13 @@ class Todo {
 
 	//==================================================deleteItem===================================================
 	deleteItem(element) {
-		element.parentElement.style.transform = `translate(-100%)`;
+		element.parentElement.style.transform = `translate(0)`;
 		let count  = 0;
 		const go = () => {
 			count += 2;
 			element.parentElement.style.left = `${count}%`;
 			const animate = requestAnimationFrame(go);
-			if (count  === 220) {
+			if (count  === 120) {
 				cancelAnimationFrame(animate);
 				this.todoData.delete(element.parentElement.key);
 				this.render();
@@ -165,13 +165,13 @@ class Todo {
 		// console.log('element.parentElement.lastElementChild: ', element.parentElement.lastElementChild);
 		// console.log('element.parentElement.previousElementSibling: ', element.parentElement.previousElementSibling);
 		// console.log('element.parentElement.nextElementSibling: ', element.parentElement.nextElementSibling);
-		element.parentElement.style.transform  = `translate(-100%)`;
+		element.parentElement.style.transform  = `translate(0)`;
 		let count  = 0;
 		const go = () => {
 			count += 2;
 			element.parentElement.style.left = `${count}%`;
 			const animate = requestAnimationFrame(go);
-			if (count  === 220) {
+			if (count  === 120) {
 				cancelAnimationFrame(animate);
 				this.todoData.forEach(item => {
 					if (item.key === element.parentElement.key) {
