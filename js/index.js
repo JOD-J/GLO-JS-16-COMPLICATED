@@ -408,9 +408,11 @@ class AppData {
 		incomeTitleElem.addEventListener('input', () => {
 			this.checkInputStr(incomeTitleElem);
 		}); 	
-		// additionIncomeItemElem.addEventListener('input', () => {
-        //     this.checkInputStr(additionIncomeItemElem);
-		// });
+		additionIncomeItemElem.forEach(item => {
+			item.addEventListener('input', () => {
+				this.checkInputStr(item);
+			})
+		});
 		
 		expensesTitleElem.addEventListener('input', () => {
             this.checkInputStr(expensesTitleElem);
