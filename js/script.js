@@ -65,7 +65,7 @@ class Todo {
 					<button class="todo-remove"></button>
 					<button class="todo-complete"></button>
 				</div>
-				<div class="error"></div>
+				<div></div>
 		`);
 		if (todo.completed) {									// false true
 			this.todoCompleted.prepend(li);						// выполненый список Todo
