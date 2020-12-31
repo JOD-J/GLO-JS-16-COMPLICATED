@@ -413,13 +413,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 		//======================================================postData==========================================================
-		function postData(formData) {
+		function postData(body) {
 			return fetch('./server.php', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: formData,
+				body: JSON.stringify(body),
 				credentials: 'include'
 			});
 		}
@@ -441,8 +441,12 @@ window.addEventListener('DOMContentLoaded', () => {
 			skWaveElem.style.display = 'block';
 			statusMessage.appendChild(skWaveElem); 					// присваеваем диву текст с loadMessage(загрузка)
 			const formData = new FormData(elem);
+			const body = {};
+			for (const val of formData.entries()) {
+				body[val[0]] = val[1];
+			}
 			if (!isError.length) {
-				postData(formData)
+				postData(body)
 					.then(response => {
 						if (response.status !== 200) {
 							throw new Error('status network mot 200');
