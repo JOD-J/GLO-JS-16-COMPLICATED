@@ -400,7 +400,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	const sendForm = () => {
 		let isError = [];														// флаг для отправки формы
 		const errorMessage = 'Что то пошло не так',									// выводим на экрам определный текст
-			loadMessage = 'Загрузка...',											// выводим на экрам определный текст
 			successMessage = 'Спасибо! Мы скоро с вами свяжемся!',					// выводим на экрам определный текст
 			notInput = 'Поля заполнены не корректно',
 			placeholderName = 'example "Иван"',
@@ -410,6 +409,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			statusMessage = document.createElement('div'), 							// создаем див для текста
 			formInputs = document.querySelectorAll('input[id]');					// получаем инпуты со всех форм
 		statusMessage.style.color = 'white';										// белый цвет для текста
+		const skWaveElem = document.querySelector('.sk-wave');
 
 
 		//======================================================postData==========================================================
@@ -437,7 +437,9 @@ window.addEventListener('DOMContentLoaded', () => {
 		//======================================================checkUserFormElems==========================================================
 		function checkUserFormElems(elem) {
 			elem.appendChild(statusMessage);
-			statusMessage.textContent = loadMessage; 			// присваеваем диву текст с loadMessage(загрузка)
+			statusMessage.textContent = '';							// присваеваем диву текст successMessage(выполнено)
+			skWaveElem.style.display = 'block';
+			statusMessage.appendChild(skWaveElem); 					// присваеваем диву текст с loadMessage(загрузка)
 			const formData = new FormData(elem);
 			if (!isError.length) {
 				postData(formData)
