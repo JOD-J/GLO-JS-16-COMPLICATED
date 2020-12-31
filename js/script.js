@@ -402,6 +402,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const errorMessage = 'Что то пошло не так',									// выводим на экрам определный текст
 			loadMessage = 'Загрузка...',											// выводим на экрам определный текст
 			successMessage = 'Спасибо! Мы скоро с вами свяжемся!',					// выводим на экрам определный текст
+			notInput = 'Поля заполнены не корректно',
 			placeholderName = 'example "Иван"',
 			placeholderPhone = 'example "+79078425469"',
 			placeholderEmail = 'example "vika@gmail.com"',
@@ -409,25 +410,18 @@ window.addEventListener('DOMContentLoaded', () => {
 			statusMessage = document.createElement('div'), 							// создаем див для текста
 			formInputs = document.querySelectorAll('input[id]');					// получаем инпуты со всех форм
 		statusMessage.style.color = 'white';										// белый цвет для текста
-		document.querySelector('#form1').appendChild(statusMessage); 				// добовляем на странциу нашь див с текстом
 
 
 		//======================================================postData==========================================================
-		function postData(body, outputData, errorData) {
-			const request = new XMLHttpRequest();
-			request.addEventListener('readystatechange', () => {
-				if (request.readyState !== 4) {
-					return;
-				}
-				if (request.status === 200) {
-					outputData();
-				} else {
-					errorData(request.status);
-				}
+		function postData(formData) {
+			return fetch('./server.php', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: formData,
+				credentials: 'include'
 			});
-			request.open('POST', './server.php'); 							// открываем соединение
-			request.setRequestHeader('Content-Type', 'application/json');	// создаем заоловок
-			request.send(JSON.stringify(body)); 							// получаем данные из формы отправляем запрос
 		}
 		//==============================================\\\\\\\postData======================================================
 
@@ -438,35 +432,29 @@ window.addEventListener('DOMContentLoaded', () => {
 			const target = event.target; 							// делегирование
 			checkUserFormElems(target);
 		});
-		//==============================================\\\\\\\userFormElems======================================================
+		//==============================================\\\\\\\checkUserFormElems======================================================
 
 		//======================================================checkUserFormElems==========================================================
 		function checkUserFormElems(elem) {
-			if (elem.id === 'form1') {
-				statusMessage.textContent = loadMessage; 			// присваеваем диву текст с loadMessage(загрузка)
-			}
+			elem.appendChild(statusMessage);
+			statusMessage.textContent = loadMessage; 			// присваеваем диву текст с loadMessage(загрузка)
 			const formData = new FormData(elem);
-			const body = {}; 									// создаем обект body
-			for (const val of formData.entries()) {				// заполняем обект body нашими элементами
-				body[val[0]] = val[1];
-			}
 			if (!isError.length) {
-				postData(body, () => { 								// передаем в функцию postData body и 2 колбек функции
-					if (elem.id === 'form1') {
+				postData(formData)
+					.then(response => {
+						if (response.status !== 200) {
+							throw new Error('status network mot 200');
+						}
 						statusMessage.textContent = successMessage;		// присваеваем диву текст successMessage(выполнено)
-					}
-					alert('Спасибо! Мы скоро с вами свяжемся!');
-					clearInput(elem);
-				}, () => {
-					if (elem.id === 'form1') {
+						clearInput(elem);
+					})
+					.catch(error => {
 						statusMessage.textContent = errorMessage;		// присваеваем диву текст errorMessage(ошибка)
-					} else {
-						alert('Что то пошло не так');
-					}
-					clearInput(elem);
-				});
+						console.log(error);
+						clearInput(elem);
+					});
 			} else {
-				alert('Поля заполнены не корректно');
+				statusMessage.textContent = notInput;		// присваеваем диву текст errorMessage(ошибка)
 			}
 		}
 		//==============================================\\\\\\\checkUserFormElems======================================================
@@ -507,7 +495,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				const target = event.target;
 				if (target.matches('[name="user_name"]')) {
 					if (!checkName(target)) {
-						item.setAttribute('placeholder', placeholderName);
+						target.setAttribute('placeholder', placeholderName);
 						showBoxShadow(!checkName(target), target);
 					} else {
 						target.setAttribute('placeholder', 'Ваше имя');
@@ -581,5 +569,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	sendForm();
 });
 //==============================================\\\\\\\DOMContentLoaded======================================================
+
 
 
