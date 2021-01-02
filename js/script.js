@@ -356,6 +356,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			if (typeValue && squareValue) {
 				total = price * typeValue * squareValue * countValue * dayValue;
 			}
+			cancelAnimationFrame(interval);
 			const animateSumm = () => {
 				interval = requestAnimationFrame(animateSumm, 50);
 				if (step < total && total < 5000) {
@@ -370,6 +371,9 @@ window.addEventListener('DOMContentLoaded', () => {
 				}
 				calcTypeElem.addEventListener('input', () => {
 					totalValueElem.textContent = 0;
+					calcSquareElem.value = '';
+					calcDayElem.value = '';
+					calcCountElem.value = '';
 				});
 			};
 			interval = requestAnimationFrame(animateSumm);
