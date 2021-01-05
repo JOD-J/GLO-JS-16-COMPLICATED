@@ -1,0 +1,15 @@
+.wrap__btn {
+	margin-bottom: 50px;
+}
+.start__btn {
+}
+.reset__btn {
+}
+.wrapper{
+}
+.block {
+	width: 100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+}
