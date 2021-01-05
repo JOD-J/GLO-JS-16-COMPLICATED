@@ -338,27 +338,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			totalValueElem = document.getElementById('total');				// цена
 		let interval;
 		//======================================================countSum===========================================================
-		const animateTotalValue = total => {
-			clearInterval(interval);
-			let count = 0;
-			interval = setInterval(() => {
-				count += 50;
-				totalValueElem.textContent = count;
-				if (count > total) {
-					clearInterval(interval);
-					totalValueElem.textContent = total;
-				}
-			}, 50);
-		};
-		const debounce = (func, ms) => {
-			let timeOut;
-			return function() {
-				const fnCall = () => func.apply(null, arguments);
-				clearTimeout(timeOut);
-				timeOut = setTimeout(fnCall, ms);
-			};
-		};
-		const go = debounce(animateTotalValue, 1000);
+
 		const countSum = () => {
 			let total = 0,
 				countValue = 1,
@@ -375,7 +355,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 			if (typeValue && squareValue) {
 				total = Math.floor(price * typeValue * squareValue * countValue * dayValue);
-				go(total);
 			}
 			calcTypeElem.addEventListener('input', () => {
 				totalValueElem.textContent = 0;
