@@ -341,8 +341,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const countSum = () => {
 			let total = 0,
 				countValue = 1,
-				dayValue = 1,
-				step = 0;
+				dayValue = 1;
 			const typeValue = calcTypeElem.options[calcTypeElem.selectedIndex].value;
 			const squareValue = +calcSquareElem.value;
 			if (calcCountElem.value > 1) {
@@ -354,29 +353,48 @@ window.addEventListener('DOMContentLoaded', () => {
 				dayValue *= 1.5;
 			}
 			if (typeValue && squareValue) {
-				total = price * typeValue * squareValue * countValue * dayValue;
+				total = Math.floor(price * typeValue * squareValue * countValue * dayValue);
 			}
-			cancelAnimationFrame(interval);
-			const animateSumm = () => {
-				interval = requestAnimationFrame(animateSumm, 50);
-				if (step < total && total < 5000) {
-					step += 50;
-					totalValueElem.textContent = step;
-				} else if (step < total && total > 5000) {
-					step += 1000;
-					totalValueElem.textContent = step;
-				} else if (step > total) {
-					cancelAnimationFrame(interval);
-					totalValueElem.textContent = Math.floor(total);
-				}
-				calcTypeElem.addEventListener('input', () => {
-					totalValueElem.textContent = 0;
-					calcSquareElem.value = '';
-					calcDayElem.value = '';
-					calcCountElem.value = '';
-				});
+			const animateTotalValue = total => {
+				clearInterval(interval);
+				let count = 0;
+				interval = setInterval(() => {
+					count += 50;
+					totalValueElem.textContent = count;
+					if (count > total) {
+						clearInterval(interval);
+						totalValueElem.textContent = total;
+					}
+				}, 50);
 			};
-			interval = requestAnimationFrame(animateSumm);
+			animateTotalValue(total);
+			calcTypeElem.addEventListener('input', () => {
+				totalValueElem.textContent = 0;
+				calcSquareElem.value = '';
+				calcDayElem.value = '';
+				calcCountElem.value = '';
+			});
+			// cancelAnimationFrame(interval);
+			// const animateSumm = () => {
+			// 	interval = requestAnimationFrame(animateSumm, 50);
+			// 	if (step < total && total < 5000) {
+			// 		step += 10;
+			// 		totalValueElem.textContent = step;
+			// 	} else if (step < total && total > 5000) {
+			// 		step += 1000;
+			// 		totalValueElem.textContent = step;
+			// 	} else if (step > total) {
+			// 		cancelAnimationFrame(interval);
+			// 		totalValueElem.textContent = Math.floor(total);
+			// 	}
+			// 	calcTypeElem.addEventListener('input', () => {
+			// 		totalValueElem.textContent = 0;
+			// 		calcSquareElem.value = '';
+			// 		calcDayElem.value = '';
+			// 		calcCountElem.value = '';
+			// 	});
+			// };
+			// interval = requestAnimationFrame(animateSumm);
 		};
 		//==============================================\\\\\\\countSum======================================================
 
