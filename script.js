@@ -30,6 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         })
-        .catch(data => output.innerHTML = data)
+        .catch(output.innerHTML = 'выбери тачку')
     });
 });
