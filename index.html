@@ -6,25 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-
-    </style>
+    <link rel="stylesheet" href="/style.css">
+    <script src="script.js" defer></script>
 </head>
-
 <body>
-
-<select id="cars">
-    <option value="no">Выберите тачку</option>
-    <option value="bmw">bmw</option>
-    <option value="volvo">volvo</option>
-</select>
-
-<div id="output">
-    выбери тачку
-</div>
-
-
-<script src="script.js"></script>
+    <header class="header">
+        <h1 class="title__header">Kонвертер валют</h1>
+    </header>
+    <main class="main">
+        <div class="main__wrapper">
+            <div class="container__usdeur">
+                <select name="" class="container__usdeur-select">
+                    <option value="select__value">Выберите валюту*</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                </select>
+                <div class="container__usdeur-wrap__input">
+                    <div class="wrap__usdeur1">
+                        <input class="container__usdeur-wrap__input-usdeur" type="text">
+                        <div class="container__usdeur-title__usdeur">Доллар США (USD)</div>
+                    </div>
+                    <div class="wrap__usdeur2">
+                        <input class="container__usdeur-wrap__input-rub" type="text">
+                        <div class="container__usdeur-title__rub">Российский рубль (RUB)</div>
+                    </div>
+                </div>
+                <button class="container__usdeur-btn">Конвертировать</button>
+            </div>
+            <div class="container__rub">
+                <select name="" class="container__rub-select">
+                    <option value="select__value">Выберите валюту*</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                </select>
+                <div class="container__rub-wrap__input">
+                    <div class="wrap__rub1">
+                        <input class="container__rub-wrap__input-rub" type="text">
+                        <div class="container__rub-title__rub">Российский рубль (RUB)</div>
+                    </div>
+                    <div class="wrap__rub2">
+                        <input class="container__rub-wrap__input-usdeur" type="text">
+                        <div class="container__rub-title__usdeur">Доллар США (USD)</div>
+                    </div>
+                </div>
+                <button class="container__rub-btn">Конвертировать</button>
+            </div>
+        </div>
+    </main>
 </body>
-
 </html>

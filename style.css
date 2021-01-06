@@ -1,0 +1,74 @@
+.header {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 100px;
+}
+.title__header {
+}
+.main {
+}
+.main__wrapper {
+	display: flex;
+	justify-content: center;
+	
+}
+.container__usdeur {
+	border: 1px solid rgb(85, 85, 85);
+	padding: 5px;
+	margin: 5px;
+}
+.container__usdeur-select {
+	margin-bottom: 10px;
+}
+.container__usdeur-wrap__input {
+}
+.wrap__usdeur1 {
+	display: flex;
+	justify-items: center;
+	margin-bottom: 10px;
+}
+.container__usdeur-wrap__input-usdeur {
+}
+.container__usdeur-title__usdeur {
+}
+.wrap__usdeur2 {
+	display: flex;
+	justify-items: center;
+	margin-bottom: 10px;
+}
+.container__usdeur-wrap__input-rub {
+}
+.container__usdeur-title__rub {
+}
+.container__usdeur-btn {
+}
+.container__rub {
+	border: 1px solid rgb(85, 85, 85);
+	padding: 5px;
+	margin: 5px;
+	}
+.container__rub-select {
+	margin-bottom: 10px;
+}
+.container__rub-wrap__input {
+}
+.wrap__rub1 {
+	display: flex;
+	justify-items: center;
+	margin-bottom: 10px;
+}
+.container__rub-wrap__input-rub {
+}
+.container__rub-title__rub {
+}
+.wrap__rub2 {
+	display: flex;
+	justify-items: center;
+	margin-bottom: 10px;
+}
+.container__rub-wrap__input-usdeur {
+}
+.container__rub-title__usdeur {
+}
+.container__rub-btn {
+}
