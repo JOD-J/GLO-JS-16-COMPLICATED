@@ -33,7 +33,6 @@ const  getUsd = () => {
 			return (response.json());
 		})
 		.then(response => {
-			console.log('response: ', response);
 			getUsdRub = response.rates.RUB;
 		})
 		.catch(error => {
@@ -52,7 +51,6 @@ const  getEur = () => {
 			return (response.json());
 		})
 		.then(response => {
-			console.log('response: ', response);
 			getEurRub = response.rates.RUB;
 		})
 		.catch(error => {
@@ -80,6 +78,8 @@ contUsdBtnElem.disabled = true;
 contRubBtnElem.disabled = true;
 contUsdSelectElem.addEventListener('change', () => {
 	if (contUsdSelectElem.value !== 'select__value') {
+		contUsdWrapInputUsdElem.value = '';
+		contUsdWrapInputRubElem.value = '';
 		if (contUsdSelectElem.value === 'USD') {
 			contUsdBtnElem.disabled = false;
 			contUsdTitleUsdElem.textContent = 'Доллар США (USD)';
@@ -94,6 +94,8 @@ contUsdSelectElem.addEventListener('change', () => {
 });
 contRubSelectElem.addEventListener('change', () => {
 	if (contRubSelectElem.value !== 'select__value') {
+		contRubWrapInputRubElem.value = '';
+		contRubWrapInputUsdElem.value = '';
 		if (contRubSelectElem.value === 'USD') {
 			contRubBtnElem.disabled = false;
 			contRubTitleUsdElem.textContent = 'Доллар США (USD)';
