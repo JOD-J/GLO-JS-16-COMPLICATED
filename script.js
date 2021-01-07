@@ -59,53 +59,85 @@ const  getEur = () => {
 };
 getUsd();
 getEur();
-contUsdBtnElem.addEventListener('click', () => {
-	if (contUsdWrapInputUsdElem.value !== '' && contUsdSelectElem.value === 'USD') {
-		contUsdWrapInputRubElem.value = +contUsdWrapInputUsdElem.value * +getUsdRub;
-	} else if (contUsdWrapInputUsdElem.value !== '' && contUsdSelectElem.value === 'EUR') {
-		contUsdWrapInputRubElem.value = +contUsdWrapInputUsdElem.value * +getEurRub;
+// contUsdBtnElem.addEventListener('click', () => {
+// 	if (contUsdWrapInputUsdElem.value !== '' && contUsdSelectElem.value === 'USD') {
+// 		contUsdWrapInputRubElem.value = +contUsdWrapInputUsdElem.value * +getUsdRub;
+// 	} else if (contUsdWrapInputUsdElem.value !== '' && contUsdSelectElem.value === 'EUR') {
+// 		contUsdWrapInputRubElem.value = +contUsdWrapInputUsdElem.value * +getEurRub;
+// 	}
+// });
+
+// contRubBtnElem.addEventListener('click', () => {
+// 	if (contRubWrapInputRubElem.value !== '' && contRubSelectElem.value === 'USD') {
+// 		contRubWrapInputUsdElem.value = +contRubWrapInputRubElem.value / +getUsdRub;
+// 	} else if (contRubWrapInputRubElem.value !== '' && contRubSelectElem.value === 'EUR') {
+// 		contRubWrapInputUsdElem.value = +contRubWrapInputRubElem.value / +getEurRub;
+// 	}
+// });
+
+const showResult = elem => {
+	console.log('elem: ', elem);
+	// if(elem.parentElement) {
+
+	// }
+	// if (elem.parentElement.children[0].value === 'USD') {
+	// 	elem.parentElement.children[1].children[1].children[0].value = elem.parentElement.children[1].children[0].children[0].value * getUsdRub;
+	// 	console.log('elem.parentElement: ', elem.parentElement);
+	// 	console.log(elem.parentElement.children[1]);
+	// 	console.log(elem.parentElement.children[1].children[0].children[0]);
+	// 	console.log(elem.parentElement.children[1].children[1].children[0]);
+
+	// }
+	// if (contRubWrapInputRubElem.value !== '' && contRubSelectElem.value === 'USD') {
+	// 	contRubWrapInputUsdElem.value = +contRubWrapInputRubElem.value / +getUsdRub;
+	// } else if (contRubWrapInputRubElem.value !== '' && contRubSelectElem.value === 'EUR') {
+	// 	contRubWrapInputUsdElem.value = +contRubWrapInputRubElem.value / +getEurRub;
+	// }
+};
+
+mainWrapperElem.addEventListener('click', event => {
+	const target = event.target;
+	console.log('target: ', target);
+	if (target.matches('.container__usdeur-btn')) {
+		showResult(target);
+	}
+	if (target.matches('.container__rub-btn')) {
+		showResult(target);
 	}
 });
 
-contRubBtnElem.addEventListener('click', () => {
-	if (contRubWrapInputRubElem.value !== '' && contRubSelectElem.value === 'USD') {
-		contRubWrapInputUsdElem.value = +contRubWrapInputRubElem.value / +getUsdRub;
-	} else if (contRubWrapInputRubElem.value !== '' && contRubSelectElem.value === 'EUR') {
-		contRubWrapInputUsdElem.value = +contRubWrapInputRubElem.value / +getEurRub;
-	}
-});
-contUsdBtnElem.disabled = true;
-contRubBtnElem.disabled = true;
-contUsdSelectElem.addEventListener('change', () => {
-	if (contUsdSelectElem.value !== 'select__value') {
-		contUsdWrapInputUsdElem.value = '';
-		contUsdWrapInputRubElem.value = '';
-		if (contUsdSelectElem.value === 'USD') {
-			contUsdBtnElem.disabled = false;
-			contUsdTitleUsdElem.textContent = 'Доллар США (USD)';
-		} else if (contUsdSelectElem.value === 'EUR') {
-			contUsdBtnElem.disabled = false;
-			contUsdTitleUsdElem.textContent = 'Евро США (EUR)';
-		}
-	} else {
-		contUsdBtnElem.disabled = true;
-		contUsdTitleUsdElem.textContent = 'Выберите валюту*';
-	}
-});
-contRubSelectElem.addEventListener('change', () => {
-	if (contRubSelectElem.value !== 'select__value') {
-		contRubWrapInputRubElem.value = '';
-		contRubWrapInputUsdElem.value = '';
-		if (contRubSelectElem.value === 'USD') {
-			contRubBtnElem.disabled = false;
-			contRubTitleUsdElem.textContent = 'Доллар США (USD)';
-		} else if (contRubSelectElem.value === 'EUR') {
-			contRubBtnElem.disabled = false;
+// contUsdBtnElem.disabled = true;
+// contRubBtnElem.disabled = true;
+// contUsdSelectElem.addEventListener('change', () => {
+// 	if (contUsdSelectElem.value !== 'select__value') {
+// 		contUsdWrapInputUsdElem.value = '';
+// 		contUsdWrapInputRubElem.value = '';
+// 		if (contUsdSelectElem.value === 'USD') {
+// 			contUsdBtnElem.disabled = false;
+// 			contUsdTitleUsdElem.textContent = 'Доллар США (USD)';
+// 		} else if (contUsdSelectElem.value === 'EUR') {
+// 			contUsdBtnElem.disabled = false;
+// 			contUsdTitleUsdElem.textContent = 'Евро США (EUR)';
+// 		}
+// 	} else {
+// 		contUsdBtnElem.disabled = true;
+// 		contUsdTitleUsdElem.textContent = 'Выберите валюту*';
+// 	}
+// });
+// contRubSelectElem.addEventListener('change', () => {
+// 	if (contRubSelectElem.value !== 'select__value') {
+// 		contRubWrapInputRubElem.value = '';
+// 		contRubWrapInputUsdElem.value = '';
+// 		if (contRubSelectElem.value === 'USD') {
+// 			contRubBtnElem.disabled = false;
+// 			contRubTitleUsdElem.textContent = 'Доллар США (USD)';
+// 		} else if (contRubSelectElem.value === 'EUR') {
+// 			contRubBtnElem.disabled = false;
 
-			contRubTitleUsdElem.textContent = 'Евро США (EUR)';
-		}
-	} else {
-		contRubBtnElem.disabled = true;
-		contRubTitleUsdElem.textContent = 'Выберите валюту*';
-	}
-});
+// 			contRubTitleUsdElem.textContent = 'Евро США (EUR)';
+// 		}
+// 	} else {
+// 		contRubBtnElem.disabled = true;
+// 		contRubTitleUsdElem.textContent = 'Выберите валюту*';
+// 	}
+// });
