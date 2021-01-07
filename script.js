@@ -1,22 +1,19 @@
-const mainWrapperElem = document.querySelector('.main__wrapper'),
-	contUsdElem = document.querySelector('.container__usdeur'),
-	contUsdSelectElem = document.querySelector('.container__usdeur-select'),
-	contUsdWrapInputElem = document.querySelector('.container__usdeur-wrap__input'),
-	contUsdTitleUsdElem = document.querySelector('.container__usdeur-title__usdeur'),
-	contUsdTitleRubElem = document.querySelector('.container__usdeur-title__rub'),
-	contUsdWrapInputUsdElem = document.querySelector('.container__usdeur-wrap__input-usdeur'),
-	contUsdWrapInputRubElem = document.querySelector('.container__usdeur-wrap__input-rub'),
-	contUsdBtnElem = document.querySelector('.container__usdeur-btn');
+const  mainWrapperElem = document.querySelector('.main__wrapper'),
+	wrapEurElem = document.querySelector('.wrap__eur'),
+	eurSelectElem = document.querySelector('.wrap__eur-select'),
+	eurInputElem = document.querySelector('.eur__input'),
+	showEurInputElem = document.querySelector('.showeur__input'),
+	setEurElem = document.querySelector('.set__eur'),
+	eurBtnElem = document.querySelector('.wrap__eur-btn'),
+	wrapRubElem = document.querySelector('.wrap__rub'),
+	rubSelecElem = document.querySelector('.wrap__rub-selec'),
+	rubInputElem = document.querySelector('.rub__input'),
+	showrubInputElem = document.querySelector('.showrub__input'),
+	getRubElem = document.querySelector('.get__rub'),
+	rubBtnElem = document.querySelector('.wrap__rub-btn');
 
-const contRubElem = document.querySelector('.container__rub'),
-	contRubSelectElem = document.querySelector('.container__rub-select'),
-	contRubWrapInputElem = document.querySelector('.container__rub-wrap__input'),
-	contRubTitleRubElem = document.querySelector('.container__rub-title__rub'),
-	contRubTitleUsdElem = document.querySelector('.container__rub-title__usdeur'),
-	contRubWrapInputRubElem = document.querySelector('.container__rub-wrap__input-rub'),
-	contRubWrapInputUsdElem = document.querySelector('.container__rub-wrap__input-usdeur'),
-	contRubBtnElem = document.querySelector('.container__rub-btn');
-
+eurBtnElem.disabled = true;
+rubBtnElem.disabled = true;
 
 let getEurRub;
 let getUsdRub;
@@ -39,6 +36,8 @@ const  getUsd = () => {
 			console.log('error: ', error);
 		});
 };
+
+
 const  getEur = () => {
 	fetch('https://api.exchangeratesapi.io/latest?base=EUR', {
 		method: 'GET',
@@ -57,87 +56,94 @@ const  getEur = () => {
 			console.log('error: ', error);
 		});
 };
+
+
 getUsd();
 getEur();
-// contUsdBtnElem.addEventListener('click', () => {
-// 	if (contUsdWrapInputUsdElem.value !== '' && contUsdSelectElem.value === 'USD') {
-// 		contUsdWrapInputRubElem.value = +contUsdWrapInputUsdElem.value * +getUsdRub;
-// 	} else if (contUsdWrapInputUsdElem.value !== '' && contUsdSelectElem.value === 'EUR') {
-// 		contUsdWrapInputRubElem.value = +contUsdWrapInputUsdElem.value * +getEurRub;
-// 	}
-// });
 
-// contRubBtnElem.addEventListener('click', () => {
-// 	if (contRubWrapInputRubElem.value !== '' && contRubSelectElem.value === 'USD') {
-// 		contRubWrapInputUsdElem.value = +contRubWrapInputRubElem.value / +getUsdRub;
-// 	} else if (contRubWrapInputRubElem.value !== '' && contRubSelectElem.value === 'EUR') {
-// 		contRubWrapInputUsdElem.value = +contRubWrapInputRubElem.value / +getEurRub;
-// 	}
-// });
 
-const showResult = elem => {
-	console.log('elem: ', elem);
-	// if(elem.parentElement) {
-
-	// }
-	// if (elem.parentElement.children[0].value === 'USD') {
-	// 	elem.parentElement.children[1].children[1].children[0].value = elem.parentElement.children[1].children[0].children[0].value * getUsdRub;
-	// 	console.log('elem.parentElement: ', elem.parentElement);
-	// 	console.log(elem.parentElement.children[1]);
-	// 	console.log(elem.parentElement.children[1].children[0].children[0]);
-	// 	console.log(elem.parentElement.children[1].children[1].children[0]);
-
-	// }
-	// if (contRubWrapInputRubElem.value !== '' && contRubSelectElem.value === 'USD') {
-	// 	contRubWrapInputUsdElem.value = +contRubWrapInputRubElem.value / +getUsdRub;
-	// } else if (contRubWrapInputRubElem.value !== '' && contRubSelectElem.value === 'EUR') {
-	// 	contRubWrapInputUsdElem.value = +contRubWrapInputRubElem.value / +getEurRub;
-	// }
+const clearInputEur = () => {
+	eurInputElem.value = '';
+	showEurInputElem.value = '';
 };
+
+
+const clearInputRub = () => {
+	rubInputElem.value = '';
+	showrubInputElem.value = '';
+};
+
+
+const showStyle = elem => {
+	switch (elem.value) {
+	case 'select__value':
+		if (elem.matches('.wrap__eur-select')) {
+			setEurElem.textContent = 'Выберите валюту*';
+			eurBtnElem.disabled = true;
+			clearInputEur();
+		} else {
+			getRubElem.textContent = 'Выберите валюту*';
+			rubBtnElem.disabled = true;
+			clearInputRub();
+		}
+		break;
+	case 'USD':
+		if (elem.matches('.wrap__eur-select')) {
+			setEurElem.textContent = 'Доллар США (USD)';
+			eurBtnElem.disabled = false;
+			clearInputEur();
+		} else {
+			getRubElem.textContent = 'Доллар США (USD)';
+			rubBtnElem.disabled = false;
+			clearInputRub();
+		}
+		break;
+	case 'EUR':
+		if (elem.matches('.wrap__eur-select')) {
+			setEurElem.textContent = 'Евро США (EUR)';
+			eurBtnElem.disabled = false;
+			clearInputEur();
+		} else {
+			getRubElem.textContent = 'Евро США (EUR)';
+			rubBtnElem.disabled = false;
+			clearInputRub();
+		}
+		break;
+	}
+};
+
+
+const showResult = (elem, select) => {
+	switch (select.value) {
+	case 'USD':
+		if (elem.parentElement.matches('.wrap__eur')) {
+			showEurInputElem.value = (+eurInputElem.value * +getUsdRub).toFixed(2);
+		} else if (elem.parentElement.matches('.wrap__rub')) {
+			showrubInputElem.value = (+rubInputElem.value / +getUsdRub).toFixed(2);
+		}
+		break;
+	case 'EUR':
+		if (elem.parentElement.matches('.wrap__eur')) {
+			showEurInputElem.value = (+eurInputElem.value * +getEurRub).toFixed(2);
+		} else if (elem.parentElement.matches('.wrap__rub')) {
+			showrubInputElem.value = (+rubInputElem.value / +getEurRub).toFixed(2);
+		}
+		break;
+	}
+};
+
 
 mainWrapperElem.addEventListener('click', event => {
 	const target = event.target;
-	console.log('target: ', target);
-	if (target.matches('.container__usdeur-btn')) {
-		showResult(target);
-	}
-	if (target.matches('.container__rub-btn')) {
-		showResult(target);
+	if (target.matches('button')) {
+		showResult(target, target.parentElement.children[0].closest('select'));
 	}
 });
 
-// contUsdBtnElem.disabled = true;
-// contRubBtnElem.disabled = true;
-// contUsdSelectElem.addEventListener('change', () => {
-// 	if (contUsdSelectElem.value !== 'select__value') {
-// 		contUsdWrapInputUsdElem.value = '';
-// 		contUsdWrapInputRubElem.value = '';
-// 		if (contUsdSelectElem.value === 'USD') {
-// 			contUsdBtnElem.disabled = false;
-// 			contUsdTitleUsdElem.textContent = 'Доллар США (USD)';
-// 		} else if (contUsdSelectElem.value === 'EUR') {
-// 			contUsdBtnElem.disabled = false;
-// 			contUsdTitleUsdElem.textContent = 'Евро США (EUR)';
-// 		}
-// 	} else {
-// 		contUsdBtnElem.disabled = true;
-// 		contUsdTitleUsdElem.textContent = 'Выберите валюту*';
-// 	}
-// });
-// contRubSelectElem.addEventListener('change', () => {
-// 	if (contRubSelectElem.value !== 'select__value') {
-// 		contRubWrapInputRubElem.value = '';
-// 		contRubWrapInputUsdElem.value = '';
-// 		if (contRubSelectElem.value === 'USD') {
-// 			contRubBtnElem.disabled = false;
-// 			contRubTitleUsdElem.textContent = 'Доллар США (USD)';
-// 		} else if (contRubSelectElem.value === 'EUR') {
-// 			contRubBtnElem.disabled = false;
 
-// 			contRubTitleUsdElem.textContent = 'Евро США (EUR)';
-// 		}
-// 	} else {
-// 		contRubBtnElem.disabled = true;
-// 		contRubTitleUsdElem.textContent = 'Выберите валюту*';
-// 	}
-// });
+mainWrapperElem.addEventListener('change', event => {
+	const target = event.target;
+	if (target.matches('select')) {
+		showStyle(target);
+	}
+});
