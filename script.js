@@ -17,15 +17,74 @@ const contRubElem = document.querySelector('.container__rub'),
 	contRubWrapInputUsdElem = document.querySelector('.container__rub-wrap__input-usdeur'),
 	contRubBtnElem = document.querySelector('.container__rub-btn');
 
-contUsdBtnElem.disabled = true;
-// contRubBtnElem.disabled = true;
 
+let getEurRub;
+let getUsdRub;
+
+const  getUsd = () => {
+	fetch('https://api.exchangeratesapi.io/latest?base=USD', {
+		method: 'GET',
+		mode: 'cors',
+	})
+		.then(response => {
+			if (response.status !== 200) {
+				throw new Error('status network mot 200');
+			}
+			return (response.json());
+		})
+		.then(response => {
+			console.log('response: ', response);
+			getUsdRub = response.rates.RUB;
+		})
+		.catch(error => {
+			console.log('error: ', error);
+		});
+};
+const  getEur = () => {
+	fetch('https://api.exchangeratesapi.io/latest?base=EUR', {
+		method: 'GET',
+		mode: 'cors',
+	})
+		.then(response => {
+			if (response.status !== 200) {
+				throw new Error('status network mot 200');
+			}
+			return (response.json());
+		})
+		.then(response => {
+			console.log('response: ', response);
+			getEurRub = response.rates.RUB;
+		})
+		.catch(error => {
+			console.log('error: ', error);
+		});
+};
+getUsd();
+getEur();
+contUsdBtnElem.addEventListener('click', () => {
+	if (contUsdWrapInputUsdElem.value !== '' && contUsdSelectElem.value === 'USD') {
+		contUsdWrapInputRubElem.value = +contUsdWrapInputUsdElem.value * +getUsdRub;
+	} else if (contUsdWrapInputUsdElem.value !== '' && contUsdSelectElem.value === 'EUR') {
+		contUsdWrapInputRubElem.value = +contUsdWrapInputUsdElem.value * +getEurRub;
+	}
+});
+
+contRubBtnElem.addEventListener('click', () => {
+	if (contRubWrapInputRubElem.value !== '' && contRubSelectElem.value === 'USD') {
+		contRubWrapInputUsdElem.value = +contRubWrapInputRubElem.value / +getUsdRub;
+	} else if (contRubWrapInputRubElem.value !== '' && contRubSelectElem.value === 'EUR') {
+		contRubWrapInputUsdElem.value = +contRubWrapInputRubElem.value / +getEurRub;
+	}
+});
+contUsdBtnElem.disabled = true;
+contRubBtnElem.disabled = true;
 contUsdSelectElem.addEventListener('change', () => {
 	if (contUsdSelectElem.value !== 'select__value') {
 		if (contUsdSelectElem.value === 'USD') {
 			contUsdBtnElem.disabled = false;
 			contUsdTitleUsdElem.textContent = 'Доллар США (USD)';
-		} else {
+		} else if (contUsdSelectElem.value === 'EUR') {
+			contUsdBtnElem.disabled = false;
 			contUsdTitleUsdElem.textContent = 'Евро США (EUR)';
 		}
 	} else {
@@ -33,62 +92,18 @@ contUsdSelectElem.addEventListener('change', () => {
 		contUsdTitleUsdElem.textContent = 'Выберите валюту*';
 	}
 });
+contRubSelectElem.addEventListener('change', () => {
+	if (contRubSelectElem.value !== 'select__value') {
+		if (contRubSelectElem.value === 'USD') {
+			contRubBtnElem.disabled = false;
+			contRubTitleUsdElem.textContent = 'Доллар США (USD)';
+		} else if (contRubSelectElem.value === 'EUR') {
+			contRubBtnElem.disabled = false;
 
-
-const  getRub = () => {
-	return fetch('https://api.exchangeratesapi.io/latest', {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(body),
-		credentials: 'include'
-	});
-}
-
-getRub();
-
-console.log(getRub());
-
-
-
-
-
-
-
-
-
-
-
-
-// const showBlock = () => {
-
-// };
-// mainWrapperElem.addEventListener('change', event => {
-// 	const target = event.target;
-// 	if (target.matches('.container__usdeur-select')) {
-// 		if (contUsdSelectElem.value !== 'select__value') {
-// 			if (contUsdSelectElem.value === 'USD') {
-// 				contUsdTitleUsdElem.textContent = 'Доллар США (USD)';
-// 			} else {
-// 				contUsdTitleUsdElem.textContent = 'Евро США (EUR)';
-// 			}
-// 		} else {
-// 			contUsdBtnElem.disabled = true;
-// 			contUsdTitleUsdElem.textContent = 'Выберите валюту*';
-// 		}
-// 	}
-// 	if (target.matches('.container__rub-select')) {
-// 		if (contRubSelectElem.value !== 'select__value') {
-// 			contRubBtnElem.disabled = false;
-// 			if (contRubSelectElem.value === 'USD') {
-// 				contRubTitleUsdElem.textContent = 'Доллар США (USD)';
-// 			} else {
-// 				contRubTitleUsdElem.textContent = 'Евро США (EUR)';
-// 			}
-// 		} else {
-// 			contRubBtnElem.disabled = true;
-// 			contRubTitleUsdElem.textContent = 'Выберите валюту*';
-// 		}
-// 	}
-// });
+			contRubTitleUsdElem.textContent = 'Евро США (EUR)';
+		}
+	} else {
+		contRubBtnElem.disabled = true;
+		contRubTitleUsdElem.textContent = 'Выберите валюту*';
+	}
+});
