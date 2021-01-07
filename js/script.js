@@ -337,6 +337,27 @@ window.addEventListener('DOMContentLoaded', () => {
 			calcDayElem = document.querySelector('.calc-day'),				// срок исполнения в днях
 			totalValueElem = document.getElementById('total');				// цена
 		let interval;
+		const animateTotalValue = value => {
+			clearInterval(interval);
+			let count = 0;
+			interval = setInterval(() => {
+				count += 50;
+				totalValueElem.textContent = count;
+				if (count > value) {
+					clearInterval(interval);
+					totalValueElem.textContent = value;
+				}
+			}, 10);
+		};
+		const debounce = (func, ms) => {
+			let timeOut;
+			return function() {
+				const fnCall = () => func.apply(null, arguments);
+				clearTimeout(timeOut);
+				timeOut = setTimeout(fnCall, ms);
+			};
+		};
+		const debouncing = debounce(animateTotalValue, 1000);
 		//======================================================countSum===========================================================
 
 		const countSum = () => {
@@ -355,8 +376,10 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 			if (typeValue && squareValue) {
 				total = Math.floor(price * typeValue * squareValue * countValue * dayValue);
+				debouncing(total);
 			}
 			calcTypeElem.addEventListener('input', () => {
+				clearInterval(interval);
 				totalValueElem.textContent = 0;
 				calcSquareElem.value = '';
 				calcDayElem.value = '';
